@@ -1,41 +1,48 @@
-"use client"
-
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
-import { Cloud, HardDrive, Lock, Share2, Edit, Search } from "lucide-react"
-import { useAuth } from "@/components/auth-provider"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Cloud, HardDrive, Lock, Share2, Edit, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./auth-provider";
+import { Button } from "./ui/button";
 
 export default function HomePage() {
-  const { login, isAuthenticated } = useAuth()
-  const router = useNavigate()
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/blob")
+      navigate("/blob");
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated, navigate]);
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-200">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-lg dark:bg-gray-950/80 dark:border-gray-800">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <HardDrive className="h-7 w-7 text-blue-600" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
               Uni<span className="text-blue-600">Drive</span>
             </span>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium hover:text-blue-600 transition-colors">
+            <Link
+              to="/features"
+              className="text-sm font-medium hover:text-blue-600 transition-colors"
+            >
               Features
             </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-blue-600 transition-colors">
+            <Link
+              to="/contact"
+              className="text-sm font-medium hover:text-blue-600 transition-colors"
+            >
               Contact
             </Link>
           </nav>
-          <Button onClick={login} className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Button
+            onClick={login}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
             Login
           </Button>
         </div>
@@ -52,24 +59,34 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300">
-              UniDrive gives you a seamless, secure, and powerful file management experience with Azure Blob Storage.
+              UniDrive gives you a seamless, secure, and powerful file
+              management experience with Azure Blob Storage.
             </p>
             <div className="mt-8 flex justify-center gap-4">
-              <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg">
-                <Link href="/blob">Get Started</Link>
+              <Button
+                asChild
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg"
+              >
+                <Link to="/blob">Get Started</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href="#contact">Contact Sales</Link>
+                <Link to="#contact">Contact Sales</Link>
               </Button>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="py-16 md:py-24 bg-white dark:bg-gray-950">
+        <section
+          id="features"
+          className="py-16 md:py-24 bg-white dark:bg-gray-950"
+        >
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold">Powerful Features, Simplified</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Powerful Features, Simplified
+              </h2>
               <p className="mt-3 max-w-xl mx-auto text-gray-600 dark:text-gray-400">
                 Everything you need to manage your cloud storage efficiently.
               </p>
@@ -110,16 +127,25 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+        <section
+          id="contact"
+          className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900"
+        >
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold">Ready to Unify Your Drives?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                Ready to Unify Your Drives?
+              </h2>
               <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                Contact our sales team to get a personalized demo or discuss your enterprise needs. We're here to help
-                you streamline your cloud storage.
+                Contact our sales team to get a personalized demo or discuss
+                your enterprise needs. We're here to help you streamline your
+                cloud storage.
               </p>
               <div className="mt-8">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Button
+                  size="lg"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
                   Contact Sales
                 </Button>
               </div>
@@ -141,13 +167,13 @@ export default function HomePage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 interface FeatureCardProps {
-  icon: React.ReactNode
-  title: string
-  description: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
 }
 
 function FeatureCard({ icon, title, description }: FeatureCardProps) {
@@ -156,9 +182,10 @@ function FeatureCard({ icon, title, description }: FeatureCardProps) {
       <div className="flex items-center justify-center w-16 h-16 mb-4 bg-blue-100 dark:bg-blue-900/30 rounded-full">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
+      <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+        {title}
+      </h3>
       <p className="text-gray-600 dark:text-gray-400">{description}</p>
     </div>
-  )
+  );
 }
-

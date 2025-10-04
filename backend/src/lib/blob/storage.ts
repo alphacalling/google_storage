@@ -1,4 +1,3 @@
-import { devLog } from "../../lib/utils/dev-log";
 import {
   BlobServiceClient,
   type ContainerClient,
@@ -6,10 +5,11 @@ import {
   generateBlobSASQueryParameters,
   BlobSASPermissions,
 } from "@azure/storage-blob";
-import { v4 as uuidv4 } from "uuid";
-import type { FileItem } from "@/lib/types";
-import { getDb } from "../db";
-import { NextResponse } from "next/server";
+// import { v4 as uuidv4 } from "uuid";
+// import type { FileItem } from "@/lib/types";
+// import { getDb } from "../db";
+// import { NextResponse } from "next/server";
+// import { devLog } from "../../lib/utils/dev-log";
 
 export class BlobStorageService {
   private containerClient: ContainerClient;
